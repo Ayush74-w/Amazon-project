@@ -1,4 +1,5 @@
-import{cart} from '../data/cart.js'
+import{cart,addToCart} from '../data/cart.js'
+// or import * cartModule form  '../data/cart.js' imports everything from the file
 import { products } from '../data/products.js'
 let productshtml=''
 products.forEach((product)=>{
@@ -52,33 +53,14 @@ products.forEach((product)=>{
         </div>`
 })
 document.querySelector('.js-products-grid').innerHTML=productshtml;
-function addToCart(productid){
-   let matchingitem;
-  cart.forEach((item)=>{
-            if(productid===item.productid){
-      matchingitem=item;
-    }
-  })
-  if(matchingitem){
-    matchingitem.quantity++;
-  }
-  else{
-    cart.push({
-            productid:productid,
-      quantity:1
-    })
-  }
 
-
-}
 function updateCartQuantity(){
    let cartquantity=0
-        cart.forEach((item)=>{
-            cartquantity+=item.quantity;
+        cart.forEach((cartitem)=>{
+            cartquantity+=cartitem.quantity;
         })
-            document.querySelector('.js-cart-quantity').innerHTML=cartquantity
-        console.log(cartquantity)
-        console.log(cart)
+        document.querySelector('.js-cart-quantity').innerHTML=cartquantity
+        console.log(cartquantity);
 }
 document.querySelectorAll('.js-add-to-cart').forEach((button)=>{
     button.addEventListener('click',()=>{
