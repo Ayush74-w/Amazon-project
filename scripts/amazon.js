@@ -1,6 +1,8 @@
 import{cart,addToCart} from '../data/cart.js'
 // or import * cartModule form  '../data/cart.js' imports everything from the file
 import { products } from '../data/products.js'
+
+import { formatCurrency } from './utils/money.js'
 let productshtml=''
 products.forEach((product)=>{
     productshtml +=`<div class="product-container">
@@ -22,7 +24,7 @@ products.forEach((product)=>{
           </div>
 
           <div class="product-price">
-            $${(product.priceCents/100).toFixed(2)}
+            $${formatCurrency(product.priceCents)}
           </div>
 
           <div class="product-quantity-container">
@@ -64,9 +66,11 @@ function updateCartQuantity(){
 }
 document.querySelectorAll('.js-add-to-cart').forEach((button)=>{
     button.addEventListener('click',()=>{
-        const productid=button.dataset.productid;
-        addToCart(productid);
+        const productId=button.dataset.productId;
+        addToCart(productId);
         updateCartQuantity();
   
     })
 })
+
+  
